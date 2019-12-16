@@ -8,7 +8,7 @@ import {
   CustomSearchInput
 } from './CustomComponents';
 import axios from 'axios';
-import { loadMatters, loadAllMetters } from '../store/actions';
+import { loadMatters } from '../store/actions';
 import CustomPagination from './CustomPagination';
 import { sortBy } from '../utils';
 
