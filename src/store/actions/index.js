@@ -1,8 +1,8 @@
 import { uuid } from 'uuidv4';
-import { ADD_MATTER } from '../constants';
+import { LOAD_MATTERS, LOAD_ALL_MATTERS } from '../constants';
 
-export const addMatter = text => ({
-  type: ADD_MATTER,
+export const loadMatters = matters => ({
+  type: LOAD_MATTERS,
   id: uuid(),
-  payload: text
+  payload: matters
 });

@@ -1,10 +1,12 @@
 import React from 'react';
-import Test from './Test';
+import Dashboard from './Dashboard';
+import GlobalFonts from '../GlobalFontProvider';
 
 export default function App() {
   return (
-    <div>
-      <Test />
-    </div>
+    <React.Fragment>
+      <GlobalFonts />
+      <Dashboard />
+    </React.Fragment>
   );
 }

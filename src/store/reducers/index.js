@@ -1,15 +1,15 @@
-import {ADD_MATTER} from '../constants';
+import { LOAD_MATTERS } from '../constants';
 
 const initialState = {
-  name: 'Old Value'
+  matters: []
 };
 
 const matter = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_MATTER:
+    case LOAD_MATTERS:
       return {
         ...state,
-        name: action.payload
+        matters: action.payload
       };
     default:
       return state;

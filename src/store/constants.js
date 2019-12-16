@@ -1,4 +1,4 @@
-
 const ADD_MATTER = 'ADD_MATTER';
+const LOAD_MATTERS = 'LOAD_MATTERS';
 
-export { ADD_MATTER };
+export { ADD_MATTER, LOAD_MATTERS };
