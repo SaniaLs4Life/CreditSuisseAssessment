@@ -1,7 +1,17 @@
 import { LOAD_MATTERS } from '../constants';
 
 const initialState = {
-  matters: []
+  matters: [],
+  user: {
+    DisplayName: 'Hakan GENC',
+    Name: 'Hakan',
+    Surname: 'Genc',
+    Department: 'IT',
+    Email: 'hakançgenc@company.com',
+    Id: 1234567890,
+    Manager: true,
+    Roles: ['Owner']
+  }
 };
 
 const matter = (state = initialState, action) => {

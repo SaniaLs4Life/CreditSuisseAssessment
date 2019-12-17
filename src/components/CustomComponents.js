@@ -7,7 +7,7 @@ const CustomHeader = styled.div`
 `;
 
 const CustomButton = styled.button`
-  color: #FFF;
+  color: #fff;
   background: #000;
   height: 40px;
   font-weight: bold;
@@ -15,6 +15,7 @@ const CustomButton = styled.button`
   padding: 0 15px 0 15px;
   border: none;
   outline: none;
+  user-select: none;
   cursor: pointer;
   font-size: 16px;
   &:hover {
@@ -29,12 +30,18 @@ const CustomSortButton = styled.button`
   padding: 0 15px 0 15px;
   border: 1px solid #000;
   outline: none;
-  background: #FFF;
+  background: #fff;
   height: 40px;
   cursor: pointer;
   display: block;
   font-weight: bold;
   display: ${props => (props.inline ? 'inline-block' : 'block')};
+  border-right: ${props => props.noRightBorder && 'none'};
+  user-select: none;
+  &:hover {
+    background: #000;
+    color: #fff;
+  }
 `;
 
 const Pagination = styled.div`
@@ -84,7 +91,8 @@ const CustomTableBodyRow = styled.tr`
 
 const CustomTableBodyColumn = styled.td`
   text-align: left;
-  border-bottom: 1px solid #DDD;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
   padding: 20px 10px 20px 10px;
 `;
 
@@ -102,6 +110,26 @@ const CustomSearchInput = styled.input.attrs({ type: 'text' })`
   margin: 10px 0 30px 0;
 `;
 
+const CustomModal = styled.div`
+  position: fixed;
+  right: 10px;
+  top: 10px;
+  background: #fff;
+  border: 1px solid #000;
+  color: #000;
+  padding: 10px 30px 30px 30px;
+`;
+
+const CustomCloseButton = styled.div`
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  font-weight: bold;
+`;
+
 export {
   CustomHeader,
   CustomButton,
@@ -115,5 +143,7 @@ export {
   CustomTableBodyColumn,
   CustomTableBodyRow,
   CustomEmptyData,
-  CustomSearchInput
+  CustomSearchInput,
+  CustomModal,
+  CustomCloseButton
 };
