@@ -1,5 +1,9 @@
 import React, { useEffect, lazy, Suspense, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import Skeleton from 'react-loading-skeleton';
+import { MdClose } from 'react-icons/md';
+import { FaInfo } from 'react-icons/fa';
 import {
   CustomHeader,
   CustomButton,
@@ -10,12 +14,9 @@ import {
 } from './CustomComponents';
 import { loadMatters } from '../store/actions';
 import CustomPagination from './CustomPagination';
-import Skeleton from 'react-loading-skeleton';
 import { ExportCSV } from './ExportCSV';
 import { MattersService } from '../Services/MattersService';
 import { ToggleContent, Modal } from './MessagePopup';
-import { MdClose } from 'react-icons/md';
-import { FaInfo } from 'react-icons/fa';
 
 const LazyLoadMattersTable = lazy(() => import('./MattersTable'));
 
@@ -76,7 +77,9 @@ export default function Dashboard() {
   return (
     <div>
       <CustomHeader>Online Reporting - GCMC</CustomHeader>
-      <CustomButton>Create a new matter</CustomButton>
+      <Link to="/form">
+        <CustomButton>Create a new matter</CustomButton>
+      </Link>
       <Divider />
       <CustomHeader>My team active items</CustomHeader>
       <CustomSortButton noRightBorder inline onClick={() => handleReload()}>
@@ -114,7 +117,9 @@ export default function Dashboard() {
         isVisible={true}
         content={hide => (
           <Modal>
-            <h4><FaInfo /> Message</h4>
+            <h4>
+              <FaInfo /> Message
+            </h4>
             New matters added successfully.
             <CustomCloseButton>
               <MdClose

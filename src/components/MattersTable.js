@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   FaSortAlphaDown,
   FaSortAlphaUp,
@@ -15,16 +16,16 @@ import {
   CustomTableHeader
 } from './CustomComponents';
 import moment from 'moment';
-import PropTypes from 'prop-types';
 import { truncate } from '../utils/index';
 import CustomTooltip from './CustomTooltip';
+import './MattersTable.scss';
 
 export default function MattersTable({ matters, handleSortBy, sortBy }) {
   return (
     <CustomTable>
       <CustomTableHeader style={{ borderBottom: '1px solid #000' }}>
         <tr>
-          <CustomTableHeaderColumn>
+          <CustomTableHeaderColumn scope="col">
             ID
             {sortBy.type === 'asc' ? (
               <FaSortNumericDown
@@ -147,8 +148,8 @@ export default function MattersTable({ matters, handleSortBy, sortBy }) {
           matters &&
           matters.map((item, i) => (
             <CustomTableBodyRow key={i}>
-              <CustomTableBodyColumn>{item.Id}</CustomTableBodyColumn>
-              <CustomTableBodyColumn>
+              <CustomTableBodyColumn data-label="ID">{item.Id}</CustomTableBodyColumn>
+              <CustomTableBodyColumn data-label="Request Name">
                 <CustomTooltip
                   message={truncate(item.RequestName, 500)}
                   position="top"
@@ -157,13 +158,13 @@ export default function MattersTable({ matters, handleSortBy, sortBy }) {
                   {truncate(item.RequestName, 50)}
                 </CustomTooltip>
               </CustomTableBodyColumn>
-              <CustomTableBodyColumn>
+              <CustomTableBodyColumn data-label="Requestor">
                 {truncate(item.Requestor, 50)}
               </CustomTableBodyColumn>
-              <CustomTableBodyColumn>
+              <CustomTableBodyColumn data-label="Good Ending">
                 {truncate(item.GoodEnding, 50)}
               </CustomTableBodyColumn>
-              <CustomTableBodyColumn>
+              <CustomTableBodyColumn data-label="Description">
                 <CustomTooltip
                   message={truncate(item.Description, 500)}
                   position="top"
@@ -172,20 +173,20 @@ export default function MattersTable({ matters, handleSortBy, sortBy }) {
                   {truncate(item.Description, 50)}
                 </CustomTooltip>
               </CustomTableBodyColumn>
-              <CustomTableBodyColumn>
+              <CustomTableBodyColumn data-label="Need Story Teller">
                 {item.NeedStoryteller === true ? 'Yes' : 'No'}
               </CustomTableBodyColumn>
-              <CustomTableBodyColumn>{item.Storyteller}</CustomTableBodyColumn>
-              <CustomTableBodyColumn title={item.WantedCharacters}>
+              <CustomTableBodyColumn data-label="Storyteller">{item.Storyteller}</CustomTableBodyColumn>
+              <CustomTableBodyColumn data-label="Wanted Characters">
                 {truncate(item.WantedCharacters, 50)}
               </CustomTableBodyColumn>
-              <CustomTableBodyColumn>
+              <CustomTableBodyColumn data-label="Deadline">
                 {moment(item.Deadline).format('LLL')}
               </CustomTableBodyColumn>
-              <CustomTableBodyColumn title={item.Budget}>
+              <CustomTableBodyColumn data-label="Budget">
                 {truncate(item.Budget, 50)}
               </CustomTableBodyColumn>
-              <CustomTableBodyColumn title={item.Status}>
+              <CustomTableBodyColumn data-label="Status">
                 {truncate(item.Status, 50)}
               </CustomTableBodyColumn>
             </CustomTableBodyRow>

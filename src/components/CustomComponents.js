@@ -130,6 +130,74 @@ const CustomCloseButton = styled.div`
   font-weight: bold;
 `;
 
+const CustomNavbar = styled.div`
+  width: 100%;
+  height: 30px;
+  background: #000;
+  color: #fff;
+  display: flex;
+  flex-direction: row-reverse;
+  box-sizing: border-box;
+  padding: 5px 30px 5px 0;
+`;
+
+const CustomImage = styled.img`
+  width: 200px;
+  margin: 30px 30px 30px 0;
+  float: right;
+`;
+
+const CustomFormButton = styled.div`
+  background: ${props => (props.inverse ? '#FFF' : '#000')};
+  color: ${props => (props.inverse ? '#7c7c7b' : '#FFF')};
+  border: 1px solid #000;
+  width: 150px;
+  height: 40px;
+  font-size: 14px;
+  text-align: center;
+  display: inline-block;
+  margin: ${props => !props.inverse && '0 0 30px 0'};
+  user-select: none;
+  padding: 10px;
+  box-sizing: border-box;
+  font-weight: bold;
+  cursor: pointer;
+`;
+
+const CustomFormHeader = styled.div`
+  font-size: 30px;
+  color: #000;
+  margin-bottom: 80px;
+`;
+
+const CustomFormInput = styled.input.attrs({ type: 'text' })`
+  width: ${props => props.width && props.width};
+  display: ${props => (props.isInline ? 'inline-block' : 'block')};
+  outline: none;
+  height: 46px;
+  box-sizing: border-box;
+  padding: 15px 10px 15px 10px;
+  border: 1px solid #a8a8a7;
+  color: #000;
+  margin-bottom: 45px;
+  font-size: 16px;
+  &:disabled {
+    color: #a8a8a7;
+    border: 1px solid #dadada;
+    background: #FFF;
+  }
+  &:focus {
+    border: 1px solid #000;
+    color: #000;
+  }
+  &:focus::placeholder {
+    color: #000;
+  }
+  &:active {
+    border: 1px solid #000;
+  }
+`;
+
 export {
   CustomHeader,
   CustomButton,
@@ -145,5 +213,10 @@ export {
   CustomEmptyData,
   CustomSearchInput,
   CustomModal,
-  CustomCloseButton
+  CustomCloseButton,
+  CustomNavbar,
+  CustomImage,
+  CustomFormButton,
+  CustomFormHeader,
+  CustomFormInput
 };
