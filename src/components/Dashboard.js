@@ -1,4 +1,11 @@
-import React, { useEffect, lazy, Suspense, useState } from 'react';
+import React, {
+  useEffect,
+  lazy,
+  Suspense,
+  useState,
+  useLayoutEffect,
+  useRef
+} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Skeleton from 'react-loading-skeleton';
@@ -23,8 +30,11 @@ const LazyLoadMattersTable = lazy(() => import('./MattersTable'));
 export default function Dashboard() {
   const [page, setPage] = useState(1);
   const [total, setTotal] = useState(0);
+  const [second, setSecond] = useState(0);
+  const [showMessage, setShowMessage] = useState(true);
   const [sortBy, setSortBy] = useState({ field: 'Id', type: 'asc' });
   const [search, setSearch] = useState('');
+  const isUnmounted = useRef(false);
   const dispatch = useDispatch();
   const matters = useSelector(state => state.matters);
 
@@ -41,6 +51,13 @@ export default function Dashboard() {
       console.error(err.message);
     }
   };
+
+  useEffect(() => {
+    let timer;
+    if (second === 3) setShowMessage(false);
+    if (showMessage) timer = setTimeout(() => {setSecond(prevState => prevState + 1)}, 1000);
+    return () => clearTimeout(timer);    
+  }, [second]);
 
   const changePageNumber = type => {
     if (type === 'increment') {
@@ -77,7 +94,7 @@ export default function Dashboard() {
   return (
     <div>
       <CustomHeader>Online Reporting - GCMC</CustomHeader>
-      <Link to="/form">
+      <Link to='/form'>
         <CustomButton>Create a new matter</CustomButton>
       </Link>
       <Divider />
@@ -97,10 +114,10 @@ export default function Dashboard() {
       />
       <CustomSearchInput
         value={search}
-        placeholder="Search..."
+        placeholder='Search...'
         onChange={handleSearch}
       />
-      <Suspense fallback={<Skeleton height="80px" count={5} />}>
+      <Suspense fallback={<Skeleton height='80px' count={5} />}>
         <LazyLoadMattersTable
           matters={matters}
           handleSortBy={handleSortBy}
@@ -114,7 +131,8 @@ export default function Dashboard() {
         page={page}
       />
       <ToggleContent
-        isVisible={true}
+        isVisible={showMessage}
+        setShowMessage={setShowMessage}
         content={hide => (
           <Modal>
             <h4>

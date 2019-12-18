@@ -178,7 +178,6 @@ const CustomFormInput = styled.input.attrs({ type: 'text' })`
   box-sizing: border-box;
   padding: 15px 10px 15px 10px;
   border: 1px solid #a8a8a7;
-  color: #000;
   margin-bottom: 45px;
   font-size: 16px;
   &:disabled {
@@ -186,17 +185,45 @@ const CustomFormInput = styled.input.attrs({ type: 'text' })`
     border: 1px solid #dadada;
     background: #FFF;
   }
-  &:focus {
-    border: 1px solid #000;
-    color: #000;
-  }
-  &:focus::placeholder {
-    color: #000;
-  }
   &:active {
     border: 1px solid #000;
   }
+  &:focus {
+    color: #000;
+    border: 1px solid #000;
+  }
 `;
+
+const CustomInputText = styled.div`
+  color: ${props => props.isDisabled ? '#a8a8a7' : '#000'};
+  font-size: 14px;
+  margin-bottom: 15px;
+  font-weight: bold;
+`;
+
+const CustomTextArea = styled.textarea`
+  width: 100%;
+  border: 1px solid #a8a8a7;
+  outline: none;
+  resize: none;
+  margin-bottom: 10px;
+  min-height: 131px;
+  padding: 15px 20px 4px 10px;
+  box-sizing: border-box;
+  &:active {
+    border: 1px solid #000;
+  }
+  &:focus {
+    color: #000;
+    border: 1px solid #000;
+  }
+  &:disabled {
+    color: #a8a8a7;
+    border: 1px solid #dadada;
+    background: #FFF;
+  }
+`;
+
 
 export {
   CustomHeader,
@@ -218,5 +245,7 @@ export {
   CustomImage,
   CustomFormButton,
   CustomFormHeader,
-  CustomFormInput
+  CustomFormInput,
+  CustomInputText,
+  CustomTextArea
 };

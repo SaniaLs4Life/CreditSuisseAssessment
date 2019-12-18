@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { FaHome } from 'react-icons/fa';
 import { useForm } from '../utils/useForm';
 import {
@@ -8,17 +8,20 @@ import {
   CustomImage,
   CustomFormButton,
   CustomFormHeader,
-  CustomFormInput
+  CustomFormInput,
+  CustomInputText,
+  CustomTextArea
 } from './CustomComponents';
 import './Form.scss';
+import CreditSuisseLogo from '../assets/credit-suisse-logo.png';
 
 export default function Form() {
-  //   console.log(useParams());
+  console.log(useParams());
   const user = useSelector(state => state.user);
 
   const [fields, handleFieldsChange] = useForm({
-    email: '',
-    password: '',
+    RequestName: '',
+    Requestor: '',
     goodEnding: ''
   });
 
@@ -28,51 +31,69 @@ export default function Form() {
 
   return (
     <div>
-      <CustomNavbar>
-        <Link to="/" style={{ color: '#FFF', textDecoration: 'none' }}>
-          <FaHome style={{ marginRight: '10px', verticalAlign: 'middle' }} />
-          <span style={{ verticalAlign: 'middle' }}>Home</span>
+      <CustomNavbar className="navbar">
+        <Link to='/' className="navbar__link">
+          <FaHome className="navbar__icon" />
+          <span className="navbar__text">Home</span>
         </Link>
       </CustomNavbar>
-      <CustomImage
-        src={
-          'https://beyond-coal.eu/wp-content/uploads/2018/11/credit-suisse-logo-png-credit-suisse-credit-suisse-logo-5000.png'
-        }
-        alt="logo"
-      />
-      <div style={{ padding: '0 30px 0 30px' }}>
-        <div style={{ clear: 'both' }} />
+      <CustomImage src={CreditSuisseLogo} alt='logo' />
+      <div className="form-container">
+        <div className="clearfix" />
         <CustomFormButton>Matter submission</CustomFormButton>
         <CustomFormButton inverse>Save changes</CustomFormButton>
         <CustomFormHeader>Matter Submission</CustomFormHeader>
         <form>
           <fieldset disabled={!isCurrentUserOwner()}>
+            <CustomInputText>Request Name*</CustomInputText>
             <CustomFormInput
-              placeholder="Request Name"
-              width="100%"
-              type="text"
-              value={fields.email}
-              name="email"
+              placeholder='Request Name'
+              width='100%'
+              type='text'
+              value={fields.RequestName}
+              name='RequestName'
               onChange={handleFieldsChange}
             />
+
+            <CustomInputText>Requestor*</CustomInputText>
             <CustomFormInput
-              placeholder="Requestor"
-              width="45%"
+              placeholder='Requestor'
+              width='100%'
               isInline={true}
-              type="text"
-              value={fields.password}
-              name="password"
+              type='text'
+              value={fields.Requestor}
+              name='Requestor'
               onChange={handleFieldsChange}
             />
+
+            <CustomInputText>Storyteller*</CustomInputText>
             <CustomFormInput
-              placeholder="Good Ending"
-              width="45%"
+              placeholder='Storyteller'
+              width='100%'
               isInline={true}
-              type="text"
-              value={fields.goodEnding}
-              name="goodEnding"
+              type='text'
+              value={fields.StoryTeller}
+              name='StoryTeller'
               onChange={handleFieldsChange}
             />
+            
+            <CustomInputText>Good Ending*</CustomInputText>
+            <label className="radio-container">Yes
+              <input type="radio" name="asd" />
+              <span className="radio-container__circle"></span>
+            </label>
+            <label className="radio-container">Depends
+              <input type="radio" name="asd" />
+              <span className="radio-container__circle"></span>
+            </label>
+            <label className="radio-container">No
+              <input type="radio" name="asd" />
+              <span className="radio-container__circle"></span>
+            </label>
+            
+            <CustomInputText>Description*</CustomInputText>
+            <CustomTextArea placeholder="Description" />
+            <div className="description-spoiler">“No spoilers please”</div>
           </fieldset>
         </form>
       </div>
