@@ -19,7 +19,7 @@ import {
   CustomSearchInput,
   CustomCloseButton
 } from './CustomComponents';
-import { loadMatters } from '../store/actions';
+import { loadMatters, setPopupVisibility } from '../store/actions';
 import CustomPagination from './CustomPagination';
 import { ExportCSV } from './ExportCSV';
 import { MattersService } from '../Services/MattersService';
@@ -36,7 +36,10 @@ export default function Dashboard() {
   const [search, setSearch] = useState('');
   const isUnmounted = useRef(false);
   const dispatch = useDispatch();
-  const matters = useSelector(state => state.matters);
+  const {isPopupMessageVisible, matters} = useSelector(state => ({
+    matters: state.matters,
+    isPopupMessageVisible: state.isPopupMessageVisible
+  }));
 
   useEffect(() => {
     fetchMatters();
@@ -54,9 +57,12 @@ export default function Dashboard() {
 
   useEffect(() => {
     let timer;
-    if (second === 3) setShowMessage(false);
-    if (showMessage) timer = setTimeout(() => {setSecond(prevState => prevState + 1)}, 1000);
-    return () => clearTimeout(timer);    
+    if (second === 3) dispatch(setPopupVisibility(false));
+    if (showMessage)
+      timer = setTimeout(() => {
+        setSecond(prevState => prevState + 1);
+      }, 1000);
+    return () => clearTimeout(timer);
   }, [second]);
 
   const changePageNumber = type => {
@@ -94,7 +100,7 @@ export default function Dashboard() {
   return (
     <div>
       <CustomHeader>Online Reporting - GCMC</CustomHeader>
-      <Link to='/form'>
+      <Link to="/form">
         <CustomButton>Create a new matter</CustomButton>
       </Link>
       <Divider />
@@ -114,10 +120,10 @@ export default function Dashboard() {
       />
       <CustomSearchInput
         value={search}
-        placeholder='Search...'
+        placeholder="Search..."
         onChange={handleSearch}
       />
-      <Suspense fallback={<Skeleton height='80px' count={5} />}>
+      <Suspense fallback={<Skeleton height="80px" count={5} />}>
         <LazyLoadMattersTable
           matters={matters}
           handleSortBy={handleSortBy}
@@ -131,7 +137,7 @@ export default function Dashboard() {
         page={page}
       />
       <ToggleContent
-        isVisible={showMessage}
+        isVisible={isPopupMessageVisible}
         setShowMessage={setShowMessage}
         content={hide => (
           <Modal>

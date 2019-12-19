@@ -1,7 +1,8 @@
-import { LOAD_MATTERS } from '../constants';
+import { LOAD_MATTERS, SET_VISIBILITY } from '../constants';
 
 const initialState = {
   matters: [],
+  isPopupMessageVisible: false,
   user: {
     DisplayName: 'Hakan GENC',
     Name: 'Hakan',
@@ -20,6 +21,11 @@ const matter = (state = initialState, action) => {
       return {
         ...state,
         matters: action.payload
+      };
+    case SET_VISIBILITY:
+      return {
+        ...state,
+        isPopupMessageVisible: action.payload
       };
     default:
       return state;

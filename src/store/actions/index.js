@@ -1,8 +1,11 @@
-import { uuid } from 'uuidv4';
-import { LOAD_MATTERS } from '../constants';
+import { LOAD_MATTERS, SET_VISIBILITY } from '../constants';
 
 export const loadMatters = matters => ({
   type: LOAD_MATTERS,
-  id: uuid(),
   payload: matters
+});
+
+export const setPopupVisibility = status => ({
+  type: SET_VISIBILITY,
+  payload: status
 });

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { FaHome } from 'react-icons/fa';
 import useForm from 'react-hook-form';
+import Popover from 'react-popover';
 // import { useForm } from '../utils/useForm';
 import {
   CustomNavbar,
@@ -12,40 +13,48 @@ import {
   CustomFormInput,
   CustomInputText,
   CustomTextArea,
-  CustomErrorMessage
+  CustomErrorMessage,
+  CustomButton
 } from './CustomComponents';
 import './Form.scss';
 import CreditSuisseLogo from '../assets/credit-suisse-logo.png';
-import DatePicker from './CustomDatePicker';
+import CustomDatePicker from './CustomDatePicker';
 import { MattersService } from '../Services/MattersService';
+import { setPopupVisibility } from '../store/actions';
 
-export default function Form() {
-  console.log(useParams());
+export default function Form({ history }) {
+  // console.log(useParams());
   const user = useSelector(state => state.user);
+  const dispatch = useDispatch();
+
+  const [toggleDate, setToggleDate] = useState(false);
+  const [Deadline, setDeadline] = useState('');
 
   const { register, handleSubmit, errors } = useForm();
 
-  const onSubmit = async (data) => {
-    
+  const onSubmit = async data => {
     let newData = {
-      id: Math.floor(Math.random()*90000) + 10000,
+      id: Math.floor(Math.random() * 90000) + 10000,
       ...data
-    }
-    console.log('data', newData);
+    };
     try {
-      const res = await MattersService.addMatter(newData);
-      console.log('res', res);
-    } catch(err) {
+      await MattersService.addMatter(newData);
+      dispatch(setPopupVisibility(true));
+      history.push('/');
+    } catch (err) {
       console.error(err.message);
     }
-    
   };
 
   const isCurrentUserOwner = () => {
     return user && user.Roles.includes('Owner');
   };
 
-  console.log('errors', errors);
+  const toggleDatePicker = () => {
+    setToggleDate(prevState => !prevState);
+  };
+
+  
   return (
     <div>
       <CustomNavbar className="navbar">
@@ -73,7 +82,9 @@ export default function Form() {
               ref={register({ required: 'This field cannot be empty!' })}
               name="RequestName"
             />
-            <CustomErrorMessage>{errors.RequestName && errors.RequestName.message}</CustomErrorMessage>
+            <CustomErrorMessage>
+              {errors.RequestName && errors.RequestName.message}
+            </CustomErrorMessage>
 
             <CustomInputText className={errors.Requestor ? 'text-error' : ''}>
               Requestor*
@@ -86,8 +97,10 @@ export default function Form() {
               className={errors.Requestor ? 'error' : ''}
               ref={register({ required: 'This field cannot be empty!' })}
               name="Requestor"
-            />            
-            <CustomErrorMessage>{errors.Requestor && errors.Requestor.message}</CustomErrorMessage>
+            />
+            <CustomErrorMessage>
+              {errors.Requestor && errors.Requestor.message}
+            </CustomErrorMessage>
 
             <CustomInputText className={errors.Storyteller ? 'text-error' : ''}>
               Storyteller*
@@ -100,50 +113,53 @@ export default function Form() {
               ref={register({ required: 'This field cannot be empty!' })}
               type="text"
               name="Storyteller"
-            />    
-            <CustomErrorMessage>{errors.Storyteller && errors.Storyteller.message}</CustomErrorMessage>
+            />
+            <CustomErrorMessage>
+              {errors.Storyteller && errors.Storyteller.message}
+            </CustomErrorMessage>
 
             <CustomInputText className={errors.GoodEnding ? 'text-error' : ''}>
               Good Ending*
             </CustomInputText>
             <label className="radio-container">
-              <span className={errors.GoodEnding ? 'radio-error' : ''}>Yes</span>
+              <span className={errors.GoodEnding ? 'radio-error' : ''}>
+                Yes
+              </span>
               <input
                 type="radio"
                 name="GoodEnding"
                 value="Yes"
                 ref={register({ required: 'This field cannot be empty!' })}
               />
-              <span
-                className="radio-container__circle"
-              ></span>
+              <span className="radio-container__circle"></span>
             </label>
             <label className="radio-container">
-            <span className={errors.GoodEnding ? 'radio-error' : ''}>Depends</span>
+              <span className={errors.GoodEnding ? 'radio-error' : ''}>
+                Depends
+              </span>
               <input
                 type="radio"
                 name="GoodEnding"
                 value="Depends"
                 ref={register({ required: 'This field cannot be empty!' })}
               />
-              <span
-                className="radio-container__circle"
-              ></span>
+              <span className="radio-container__circle"></span>
             </label>
             <label className="radio-container">
-            <span className={errors.GoodEnding ? 'radio-error' : ''}>No</span>
+              <span className={errors.GoodEnding ? 'radio-error' : ''}>No</span>
               <input
                 type="radio"
                 name="GoodEnding"
                 value="No"
                 ref={register({ required: 'This field cannot be empty!' })}
               />
-              <span
-                className="radio-container__circle"
-              ></span>
+              <span className="radio-container__circle"></span>
             </label>
-            <CustomErrorMessage style={{marginTop: '10px'}}>{errors.GoodEnding && errors.GoodEnding.message}</CustomErrorMessage>
-
+            {errors.GoodEnding && (
+              <CustomErrorMessage style={{ marginTop: '10px' }}>
+                {errors.GoodEnding.message}
+              </CustomErrorMessage>
+            )}
             <CustomInputText className={errors.Description ? 'text-error' : ''}>
               Description*
             </CustomInputText>
@@ -151,13 +167,44 @@ export default function Form() {
               placeholder="Description"
               name="Description"
               className={errors.Description ? 'error' : ''}
-              ref={register({ required: 'This field cannot be empty!' })}
+              ref={register({
+                required: true,
+                minLength: 250
+              })}
             />
-            <CustomErrorMessage>{errors.Description && errors.Description.message}</CustomErrorMessage>
             <div className="description-spoiler">“No spoilers please”</div>
 
-            <DatePicker register={register} />
-            <button type="submit">Save</button>
+            {errors.Description && (
+              <CustomErrorMessage>
+                {errors.Description.type === 'required' &&
+                  'This field cannot be empty!'}
+                {errors.Description.type === 'minLength' &&
+                  'You must enter minimum 250 characters!'}
+              </CustomErrorMessage>
+            )}
+
+            <CustomInputText>Deadline</CustomInputText>
+            <Popover
+              isOpen={toggleDate}
+              body={
+                <CustomDatePicker
+                  setDeadline={setDeadline}
+                  toggleDatePicker={toggleDatePicker}
+                />
+              }
+            >
+              <CustomFormInput
+                width="100%"
+                type="text"
+                onClick={toggleDatePicker}
+                value={Deadline}
+                onChange={() => {}}
+                name="Deadline"
+                ref={register}
+                placeholder="DD/MM/YYYY"
+              />
+            </Popover>
+            <CustomButton type="submit">Save</CustomButton>
           </fieldset>
         </form>
       </div>

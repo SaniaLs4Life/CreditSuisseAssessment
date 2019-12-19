@@ -4,90 +4,109 @@ import PropTypes from 'prop-types';
 import { IoIosArrowBack, IoIosArrowForward, IoMdClose } from 'react-icons/io';
 import './CustomDatePicker.scss';
 
-export default function DatePicker({register}) {
-  const [days, setDays] = useState(moment());
-  const [month, setMonth] = useState(moment());
-  const [year, setYear] = useState(moment());
-  const [date, setDate] = useState(`${days}/${month}/${year}`);
-  // useEffect(() => {
-  //   console.log('month days', moment(month).daysInMonth())
-  //   setDays(moment(11).daysInMonth());
-  // }, [month, days]);
-  const nextMonth = () => {
-    setMonth(moment(month).add(1, 'month'));
-  };
-  const nextYear = () => {
-    setYear(moment(year).add(1, 'year'));
-  };
+export default function CustomDatePicker({ toggleDatePicker, setDeadline }) {
+  const [days, setDays] = useState(
+    moment()
+      .date()
+      .toString()
+  );
+  const [month, setMonth] = useState(
+    moment()
+      .month()
+      .toString()
+  );
+  const [year, setYear] = useState(
+    moment()
+      .year()
+      .toString()
+  );
 
-  const handleSetMonth = (i, e) => {
-    console.log('i', i);
-    setMonth(i);
-  };
-
-  const handleSetDays = e => {
-    console.log('selected day', e);
-    setDays(e + 1);
-  };
-  // console.log("normal", date);
-  // console.log(
-  //   "current custom",
-  //   moment(date, "DD/MM/YYYY")
-  //     .utc()
-  //     .format("LLL")
-  // );
-  // console.log(
-  //   "current",
-  //   moment(date, "DD/MM/YYYY")
-  //     .utc()
-  //     .format("LLL")
-  // );
+  useEffect(() => {
+    setDeadline(
+      `${moment()
+        .month(month)
+        .format('MM')}/${moment()
+        .date(days)
+        .format('DD')}/${moment()
+        .year(year)
+        .format('YYYY')}`
+    );
+  }, [days, month, year]);
 
   const handleGoToToday = () => {
-    setDays(days);
-    setMonth(month);
-    setYear(year);
-    console.log(days.date(), month.month(), year.year());
+    setDays(moment().date());
+    setMonth(moment().month());
+    setYear(moment().year());
   };
 
-  const handleNextMonthName = () => {
-    setMonth(prevState => prevState.add(1, 'month'));
-    console.log(month.format('MMMM'));
+  const handleChangeMonth = isNext => {
+    if (isNext) {
+      setMonth(
+        moment(month)
+          .add(1, 'month')
+          .format('M')
+      );
+    } else {
+      setMonth(
+        moment(month)
+          .add(-1, 'month')
+          .format('M')
+      );
+    }
   };
 
-  const handleNextYear = () => {
-    // setYear(prevState => prevState.add(1, 'year'));
-    setYear(year.add(1, 'year'));
-    console.log(year.format('YYYY'));
+  const handleNextYear = value => {
+    setYear(prevState =>
+      moment()
+        .year(prevState)
+        .add(value, 'year')
+        .format('YYYY')
+    );
   };
 
   const getYear = () => {
-    return year.format('YYYY');
+    return moment()
+      .year(year)
+      .format('YYYY');
   };
 
-  console.log('date', date);
+  const handleSetMonth = month => {
+    setMonth(month);
+  };
+
+  const handleSetDays = day => {
+    let dayString = day.toString();
+    setDays(dayString);
+  };
+  // console.log("normal", date); console.log("current
+  // custom", moment(date, "DD/MM/YYYY") .utc()
+  // .format("LLL")
+  // );
+  // console.log("current", moment(date, "DD/MM/YYYY")
+  //   .utc() .format("LLL")
+  // );
+
   return (
     <div>
-      <input
-        type="text"
-        name="Deadline"
-        ref={register({ required: true })}
-        placeholder="DD/MM/YYYY"
-      />
       <div className="date-container">
-        <div className="date-container__close"><IoMdClose /></div>
+        <div className="date-container__close">
+          <IoMdClose size="32px" onClick={toggleDatePicker} />
+        </div>
         <div className="date-container__header">
           <div className="date-container__header--month">
             <IoIosArrowBack
+              onClick={() => handleChangeMonth(false)}
               style={{
                 verticalAlign: 'middle',
                 marginRight: '15px',
                 cursor: 'pointer'
               }}
             />
-            {month.format('MMMM')}
+            {moment()
+              .month(month)
+              .format('MMMM')}
             <IoIosArrowForward
-              onClick={handleNextMonthName}
+              onClick={() => handleChangeMonth(true)}
               style={{
                 verticalAlign: 'middle',
                 marginLeft: '15px',
@@ -97,6 +116,7 @@ export default function DatePicker({register}) {
           </div>
           <div className="date-container__header--year">
             <IoIosArrowBack
+              onClick={() => handleNextYear(-1)}
               style={{
                 verticalAlign: 'middle',
                 marginRight: '15px',
@@ -105,7 +125,7 @@ export default function DatePicker({register}) {
             />
             {getYear()}
             <IoIosArrowForward
-              onClick={() => handleNextYear()}
+              onClick={() => handleNextYear(1)}
               style={{
                 verticalAlign: 'middle',
                 marginLeft: '15px',
@@ -115,19 +135,26 @@ export default function DatePicker({register}) {
           </div>
         </div>
         <div className="date-container__days">
-          {moment.weekdays().map((e, i) => (
+          {moment.weekdaysShort().map((e, i) => (
             <div key={i} className="date-container__days--day">
-              {e.toString().substring(0, 3)}
+              {e}
             </div>
           ))}
         </div>
         <div className="date-container__days--numbers">
-          {[...Array(month.daysInMonth()).keys()].map((e, i) => {
+          {[
+            ...Array(
+              moment()
+                .days(month)
+                .daysInMonth()
+            ).keys()
+          ].map((e, i) => {
             return (
               <div
+                onClick={() => handleSetDays(i + 1)}
                 key={i}
                 className={`date-container__days--numbers-number ${
-                  i === days.date() - 1 ? 'selected' : ''
+                  i == days - 1 ? 'selected' : ''
                 }`}
               >
                 {e + 1}
@@ -136,15 +163,16 @@ export default function DatePicker({register}) {
           })}
         </div>
         <div className="date-container__months">
-          {moment.months().map((e, i) => {
+          {moment.monthsShort().map((e, i) => {
             return (
               <div
+                onClick={() => handleSetMonth(i.toString())}
                 key={i}
                 className={`date-container__months--month ${
-                  i === month.month() ? 'selected' : ''
+                  String(i) == month ? 'selected' : ''
                 }`}
               >
-                {e.toString().substring(0, 3)}
+                {e}
               </div>
             );
           })}
@@ -157,3 +185,7 @@ export default function DatePicker({register}) {
   );
 }
 
+CustomDatePicker.propTypes = {
+  setDeadline: PropTypes.func,
+  toggleDatePicker: PropTypes.func
+};
