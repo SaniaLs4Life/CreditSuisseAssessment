@@ -148,7 +148,7 @@ export default function MattersTable({ matters, handleSortBy, sortBy }) {
           matters &&
           matters.map((item, i) => (
             <CustomTableBodyRow key={i}>
-              <CustomTableBodyColumn data-label="ID">{item.Id}</CustomTableBodyColumn>
+              <CustomTableBodyColumn data-label="ID">{truncate(item.Id, 5) || truncate(item.id, 5)}</CustomTableBodyColumn>
               <CustomTableBodyColumn data-label="Request Name">
                 <CustomTooltip
                   message={truncate(item.RequestName, 500)}

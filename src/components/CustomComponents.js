@@ -178,7 +178,7 @@ const CustomFormInput = styled.input.attrs({ type: 'text' })`
   box-sizing: border-box;
   padding: 15px 10px 15px 10px;
   border: 1px solid #a8a8a7;
-  margin-bottom: 45px;
+  margin-bottom: 5px;
   font-size: 16px;
   &:disabled {
     color: #a8a8a7;
@@ -224,6 +224,13 @@ const CustomTextArea = styled.textarea`
   }
 `;
 
+const CustomErrorMessage = styled.div`
+  color: #d91e19;
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 45px;
+`;
+
 
 export {
   CustomHeader,
@@ -247,5 +254,6 @@ export {
   CustomFormHeader,
   CustomFormInput,
   CustomInputText,
-  CustomTextArea
+  CustomTextArea,
+  CustomErrorMessage
 };
