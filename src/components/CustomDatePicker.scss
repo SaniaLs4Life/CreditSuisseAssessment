@@ -18,6 +18,9 @@
   color: #fff;
 }
 
+
+
+
 .date-container {
   height: 368px;
   user-select: none;
@@ -127,69 +130,13 @@
     }
   }
 }
+@media only screen and (max-width: 900px) {
+  .date-container {
+    width: fit-content;
+  }
+}
 
 .selected {
   background: #000;
   color: #fff;
 }
-
-//   <div className="date-container">
-//       <div style={{padding: '10px', border: '1px solid #000', marginBottom: '10px'}} onClick={handleGoToToday}>Go to today</div>
-//       <div>
-//         <div
-//           onClick={nextYear}
-//           style={{
-//             width: "30px",
-//             display: "inline-block",
-//             padding: "10px",
-//             border: "1px solid #000"
-//           }}
-//         >
-//           +
-//         </div>
-//         {year}
-//       </div>
-//       <div
-//         onClick={nextMonth}
-//         style={{
-//           width: "30px",
-//           display: "inline-block",
-//           padding: "10px",
-//           border: "1px solid #000"
-//         }}
-//       >
-//         +
-//       </div>
-//       <div
-//         style={{
-//           width: "30px",
-//           display: "inline-block",
-//           padding: "10px",
-//           border: "1px solid #000"
-//         }}
-//       >
-//         -
-//       </div>
-//       <div className="months-container">
-//         {moment.months().map((e, i) => (
-//           <div
-//             className={`months ${i === month ? "selected" : ""}`}
-//             onClick={() => handleSetMonth(i, e)}
-//           >
-//             {e.toString().substring(0, 3)}
-//           </div>
-//         ))}
-//       </div>
-//       <div className="months-container">
-//         {[...Array(moment(month).daysInMonth()).keys()].map((e, i) => {
-//           return (
-//             <div
-//               className={`months ${i === days - 1 ? "selected" : ""}`}
-//               onClick={() => handleSetDays(i)}
-//             >
-//               {e + 1}
-//             </div>
-//           );
-//         })}
-//       </div>
-//     </div>

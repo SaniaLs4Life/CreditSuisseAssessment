@@ -144,7 +144,7 @@ export default function Dashboard() {
             <h4>
               <FaInfo /> Message
             </h4>
-            New matters added successfully.
+            New matters has been saved successfully.
             <CustomCloseButton>
               <MdClose
                 onClick={hide}

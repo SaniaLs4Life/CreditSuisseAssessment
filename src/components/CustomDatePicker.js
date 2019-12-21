@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import { IoIosArrowBack, IoIosArrowForward, IoMdClose } from 'react-icons/io';
+import { CustomFormInput } from './CustomComponents';
+import Popover from 'react-popover';
 import './CustomDatePicker.scss';
 
-export default function CustomDatePicker({ toggleDatePicker, setDeadline }) {
-  const [days, setDays] = useState(
+export default function CustomDatePicker({ register, name }) {
+  const [day, setDay] = useState(
     moment()
       .date()
       .toString()
@@ -21,20 +23,24 @@ export default function CustomDatePicker({ toggleDatePicker, setDeadline }) {
       .toString()
   );
 
+  const [toggleDate, setToggleDate] = useState(false);
+
+  const [Deadline, setDeadline] = useState('');
+
   useEffect(() => {
     setDeadline(
       `${moment()
         .month(month)
         .format('MM')}/${moment()
-        .date(days)
+        .date(day)
         .format('DD')}/${moment()
         .year(year)
         .format('YYYY')}`
     );
-  }, [days, month, year]);
+  }, [day, month, year]);
 
   const handleGoToToday = () => {
-    setDays(moment().date());
+    setDay(moment().date());
     setMonth(moment().month());
     setYear(moment().year());
   };
@@ -74,114 +80,126 @@ export default function CustomDatePicker({ toggleDatePicker, setDeadline }) {
     setMonth(month);
   };
 
-  const handleSetDays = day => {
+  const handleSetDay = day => {
     let dayString = day.toString();
-    setDays(dayString);
+    toggleDatePicker();
+    setDay(dayString);
   };
-  // console.log("normal", date); console.log("current
-  // custom", moment(date, "DD/MM/YYYY") .utc()
-  // .format("LLL")
-  // );
-  // console.log("current", moment(date, "DD/MM/YYYY")
-  //   .utc() .format("LLL")
-  // );
+
+  const toggleDatePicker = () => {
+    setToggleDate(prevState => !prevState);
+  };
 
   return (
-    <div>
-      <div className="date-container">
-        <div className="date-container__close">
-          <IoMdClose size="32px" onClick={toggleDatePicker} />
-        </div>
-        <div className="date-container__header">
-          <div className="date-container__header--month">
-            <IoIosArrowBack
-              onClick={() => handleChangeMonth(false)}
-              style={{
-                verticalAlign: 'middle',
-                marginRight: '15px',
-                cursor: 'pointer'
-              }}
-            />
-            {moment()
-              .month(month)
-              .format('MMMM')}
-            <IoIosArrowForward
-              onClick={() => handleChangeMonth(true)}
-              style={{
-                verticalAlign: 'middle',
-                marginLeft: '15px',
-                cursor: 'pointer'
-              }}
-            />
+    <Popover
+      isOpen={toggleDate}
+      body={
+        <div className="date-container">
+          <div className="date-container__close">
+            <IoMdClose size="32px" onClick={toggleDatePicker} />
           </div>
-          <div className="date-container__header--year">
-            <IoIosArrowBack
-              onClick={() => handleNextYear(-1)}
-              style={{
-                verticalAlign: 'middle',
-                marginRight: '15px',
-                cursor: 'pointer'
-              }}
-            />
-            {getYear()}
-            <IoIosArrowForward
-              onClick={() => handleNextYear(1)}
-              style={{
-                verticalAlign: 'middle',
-                marginLeft: '15px',
-                cursor: 'pointer'
-              }}
-            />
-          </div>
-        </div>
-        <div className="date-container__days">
-          {moment.weekdaysShort().map((e, i) => (
-            <div key={i} className="date-container__days--day">
-              {e}
+          <div className="date-container__header">
+            <div className="date-container__header--month">
+              <IoIosArrowBack
+                onClick={() => handleChangeMonth(false)}
+                style={{
+                  verticalAlign: 'middle',
+                  marginRight: '15px',
+                  cursor: 'pointer'
+                }}
+              />
+              {moment()
+                .month(month)
+                .format('MMMM')}
+              <IoIosArrowForward
+                onClick={() => handleChangeMonth(true)}
+                style={{
+                  verticalAlign: 'middle',
+                  marginLeft: '15px',
+                  cursor: 'pointer'
+                }}
+              />
             </div>
-          ))}
-        </div>
-        <div className="date-container__days--numbers">
-          {[
-            ...Array(
-              moment()
-                .days(month)
-                .daysInMonth()
-            ).keys()
-          ].map((e, i) => {
-            return (
-              <div
-                onClick={() => handleSetDays(i + 1)}
-                key={i}
-                className={`date-container__days--numbers-number ${
-                  i == days - 1 ? 'selected' : ''
-                }`}
-              >
-                {e + 1}
-              </div>
-            );
-          })}
-        </div>
-        <div className="date-container__months">
-          {moment.monthsShort().map((e, i) => {
-            return (
-              <div
-                onClick={() => handleSetMonth(i.toString())}
-                key={i}
-                className={`date-container__months--month ${
-                  String(i) == month ? 'selected' : ''
-                }`}
-              >
+            <div className="date-container__header--year">
+              <IoIosArrowBack
+                onClick={() => handleNextYear(-1)}
+                style={{
+                  verticalAlign: 'middle',
+                  marginRight: '15px',
+                  cursor: 'pointer'
+                }}
+              />
+              {getYear()}
+              <IoIosArrowForward
+                onClick={() => handleNextYear(1)}
+                style={{
+                  verticalAlign: 'middle',
+                  marginLeft: '15px',
+                  cursor: 'pointer'
+                }}
+              />
+            </div>
+          </div>
+          <div className="date-container__days">
+            {moment.weekdaysShort().map((e, i) => (
+              <div key={i} className="date-container__days--day">
                 {e}
               </div>
-            );
-          })}
+            ))}
+          </div>
+          <div className="date-container__days--numbers">
+            {[
+              ...Array(
+                moment()
+                  .days(month)
+                  .daysInMonth()
+              ).keys()
+            ].map((e, i) => {
+              return (
+                <div
+                  onClick={() => handleSetDay(i + 1)}
+                  key={i}
+                  className={`date-container__days--numbers-number ${
+                    i == day - 1 ? 'selected' : ''
+                  }`}
+                >
+                  {e + 1}
+                </div>
+              );
+            })}
+          </div>
+          <div className="date-container__months">
+            {moment.monthsShort().map((e, i) => {
+              return (
+                <div
+                  onClick={() => handleSetMonth(i.toString())}
+                  key={i}
+                  className={`date-container__months--month ${
+                    String(i) == month ? 'selected' : ''
+                  }`}
+                >
+                  {e}
+                </div>
+              );
+            })}
+          </div>
+          <div className="date-container__button" onClick={handleGoToToday}>
+            Go to today
+          </div>
         </div>
-        <div className="date-container__button" onClick={handleGoToToday}>
-          Go to today
-        </div>
-      </div>
-    </div>
+      }
+    >
+      <CustomFormInput
+        width="100%"
+        type="text"
+        onClick={toggleDatePicker}
+        onChange={() => {}}
+        value={Deadline}
+        name={name}
+        ref={register}
+        placeholder="DD/MM/YYYY"
+      />
+    </Popover>
   );
 }
 

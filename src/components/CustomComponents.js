@@ -12,6 +12,7 @@ const CustomButton = styled.button`
   height: 40px;
   font-weight: bold;
   text-align: center;
+  margin: 60px 15px 60px 0;
   padding: 0 15px 0 15px;
   border: none;
   outline: none;
@@ -178,7 +179,7 @@ const CustomFormInput = styled.input.attrs({ type: 'text' })`
   box-sizing: border-box;
   padding: 15px 10px 15px 10px;
   border: 1px solid #a8a8a7;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
   font-size: 16px;
   &:disabled {
     color: #a8a8a7;
@@ -228,7 +229,6 @@ const CustomErrorMessage = styled.div`
   color: #d91e19;
   font-size: 14px;
   font-weight: bold;
-  margin-bottom: 45px;
 `;
 
 
