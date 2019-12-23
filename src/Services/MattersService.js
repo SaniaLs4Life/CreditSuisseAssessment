@@ -14,5 +14,8 @@ export const MattersService = {
   },
   updateMatterById: (id, data) => {
     return axios.put(`http://localhost:9000/Requests/${id}`, data);
+  },
+  sendEmail: email => {
+    return axios.post('http://localhost:9000/Email', email);
   }
 };

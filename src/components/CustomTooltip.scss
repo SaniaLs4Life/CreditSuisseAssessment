@@ -1,8 +1,7 @@
 .Tooltip {
     position: relative;
     display: inline-flex;
-    &__toggler {
-  
+    &__toggler {  
       &:hover {
         cursor: pointer;
       }
@@ -19,6 +18,7 @@
       text-align: center;
       width: fit-content;
       max-height: fit-content;
+      word-break: break-all;
       font-size: 0.8rem;
   
       &::after {

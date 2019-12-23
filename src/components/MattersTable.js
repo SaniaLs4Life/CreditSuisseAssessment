@@ -155,7 +155,10 @@ export default function MattersTable({
         {matters.length > 0 ? (
           matters &&
           matters.map((item, i) => (
-            <CustomTableBodyRow key={i} onClick={() => handleEdit(item.Id || item.id)}>
+            <CustomTableBodyRow
+              key={i}
+              onClick={() => handleEdit(item.Id || item.id)}
+            >
               <CustomTableBodyColumn data-label="ID">
                 {truncate(item.Id, 5) || truncate(item.id, 5)}
               </CustomTableBodyColumn>
@@ -190,7 +193,13 @@ export default function MattersTable({
                 {item.Storyteller}
               </CustomTableBodyColumn>
               <CustomTableBodyColumn data-label="Wanted Characters">
-                {truncate(item.WantedCharacters, 50)}
+                <CustomTooltip
+                  message={truncate(item.WantedCharacters, 500)}
+                  position="top"
+                  key="tooltip-1"
+                >
+                  {truncate(item.WantedCharacters, 50)}
+                </CustomTooltip>
               </CustomTableBodyColumn>
               <CustomTableBodyColumn data-label="Deadline">
                 {moment(item.Deadline).format('LLL')}

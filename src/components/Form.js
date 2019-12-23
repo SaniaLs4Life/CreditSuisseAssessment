@@ -21,6 +21,7 @@ import { MattersService } from '../Services/MattersService';
 import { setPopupVisibility } from '../store/actions';
 import CustomPersonPicker from './CustomPersonPicker';
 import moment from 'moment';
+import CustomMultichoice from './CustomMultichoice';
 
 export default function Form({ history }) {
   const user = useSelector(state => state.user);
@@ -45,7 +46,11 @@ export default function Form({ history }) {
       setValue('Description', res.data[0] && res.data[0].Description);
       setValue('NeedStoryteller', res.data[0] && res.data[0].NeedStoryteller);
       setValue('Storyteller', res.data[0] && res.data[0].Storyteller);
-      setValue('Deadline', res.data[0] && moment(res.data[0].Deadline).format('L'));
+      setValue('WantedCharacters', res.data[0] && res.data[0].WantedCharacters);
+      setValue(
+        'Deadline',
+        res.data[0] && moment(res.data[0].Deadline).format('L')
+      );
       setValue('Budget', res.data[0] && res.data[0].Budget);
       setIsNeedStorytellerChecked(
         res.data[0] && res.data[0].NeedStoryteller ? true : false
@@ -68,8 +73,15 @@ export default function Form({ history }) {
         Status: status,
         ...data
       };
+      let emailData = {
+        id: Math.floor(Math.random() * 90000) + 10000,
+        to: `${data.Requestor}, ${data.Storyteller}`,
+        subject: 'New Request',
+        body: `Hi, A new request has been created by (${data.Requestor}). Cheers, Story Team`
+      };
       try {
         await MattersService.addMatter(newData);
+        await MattersService.sendEmail(emailData);
         dispatch(setPopupVisibility(true));
         history.push('/');
       } catch (err) {
@@ -101,7 +113,6 @@ export default function Form({ history }) {
   const isCurrentUserOwner = () => {
     return user && user.Roles.includes('Owner');
   };
-
 
   return (
     <div>
@@ -152,7 +163,12 @@ export default function Form({ history }) {
               >
                 Requestor*
               </CustomInputText>
-              <CustomPersonPicker register={register} errors={errors} />
+              <CustomPersonPicker
+                isCurrentUserOwner={isCurrentUserOwner()}
+                setValue={setValue}
+                register={register}
+                errors={errors}
+              />
             </div>
 
             <div className="margin-bottom">
@@ -308,7 +324,6 @@ export default function Form({ history }) {
                 </CustomErrorMessage>
               )}
             </div>
-            
             {isNeedStorytellerChecked && (
               <div className="margin-bottom">
                 <CustomInputText
@@ -318,7 +333,7 @@ export default function Form({ history }) {
                 </CustomInputText>
                 <CustomFormInput
                   placeholder="Storyteller"
-                  width="100%"                  
+                  width="100%"
                   className={errors.Storyteller ? 'error' : ''}
                   type="text"
                   name="Storyteller"
@@ -332,6 +347,16 @@ export default function Form({ history }) {
               </div>
             )}
 
+            <div className="margin-bottom">
+              <CustomInputText>Wanted characters</CustomInputText>
+              <CustomMultichoice
+                getValues={getValues}
+                register={register}
+                isCurrentUserOwner={isCurrentUserOwner()}
+                setValue={setValue}
+              />
+            </div>
+
             <input hidden name="Status" />
 
             <div className="margin-bottom">
@@ -340,7 +365,12 @@ export default function Form({ history }) {
               >
                 Deadline
               </CustomInputText>
-              <CustomDatePicker value={getValues().Deadline} register={register} name="Deadline" />
+              <CustomDatePicker
+                value={getValues().Deadline}
+                register={register}
+                isCurrentUserOwner={isCurrentUserOwner()}
+                name="Deadline"
+              />
             </div>
 
             <div className="margin-bottom">

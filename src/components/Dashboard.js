@@ -1,9 +1,4 @@
-import React, {
-  useEffect,
-  lazy,
-  Suspense,
-  useState
-} from 'react';
+import React, { useEffect, lazy, Suspense, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Skeleton from 'react-loading-skeleton';
@@ -17,7 +12,11 @@ import {
   CustomSearchInput,
   CustomCloseButton
 } from './CustomComponents';
-import { loadMatters, setPopupVisibility } from '../store/actions';
+import {
+  loadMatters,
+  setPopupVisibility,
+  setCurrentUser
+} from '../store/actions';
 import CustomPagination from './CustomPagination';
 import { ExportCSV } from './ExportCSV';
 import { MattersService } from '../Services/MattersService';
@@ -95,6 +94,10 @@ export default function Dashboard({ history }) {
     setSearch(e.target.value);
   };
 
+  const handleChangeUser = () => {
+    dispatch(setCurrentUser(true));
+  };
+
   return (
     <div className="dashboard-container">
       <CustomHeader>Online Reporting - GCMC</CustomHeader>
@@ -105,6 +108,9 @@ export default function Dashboard({ history }) {
       <CustomHeader>My team active items</CustomHeader>
       <CustomSortButton noRightBorder inline onClick={() => handleReload()}>
         Reload
+      </CustomSortButton>
+      <CustomSortButton noRightBorder inline onClick={() => handleChangeUser()}>
+        Change current user
       </CustomSortButton>
       <ExportCSV csvData={matters} />
       <span className="request-result">

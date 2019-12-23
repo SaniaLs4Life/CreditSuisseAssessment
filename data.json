@@ -1,4 +1,24 @@
 {
+  "Email": [
+    {
+      "id": 20217,
+      "to": "hakangenc@gmail.com, storyteller@gmail.com",
+      "subject": "New Request",
+      "body": "Hi, A new request has been created by (hakangenc@gmail.com). Cheers, Story Team"
+    },
+    {
+      "id": 70519,
+      "to": "bar@gmail.com, Test Story Teller",
+      "subject": "New Request",
+      "body": "Hi, A new request has been created by (bar@gmail.com). Cheers, Story Team"
+    },
+    {
+      "id": 52261,
+      "to": "Wanted, Test Story Teller",
+      "subject": "New Request",
+      "body": "Hi, A new request has been created by (Wanted). Cheers, Story Team"
+    }
+  ],
   "Users": [
     {
       "DisplayName": "Ali Gator (DABA)",
@@ -68,52 +88,53 @@
   ],
   "Requests": [
     {
-      "Status": "New",
+      "Status": "Draft",
       "RequestName": "Fables at the tables",
-      "Requestor": "Requestor",
+      "Requestor": "johndoe@gmail.com",
       "GoodEnding": "Yes",
       "Description": "Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.",
       "NeedStoryteller": true,
-      "Deadline": "12/28/2019",
+      "WantedCharacters": "Nolan,Brayan,Lula,Garland,Michele,Gino,Brayan,Lula,Garland,Michele,Gino,Lula,Garland,Michele,Gino,Garland,Michele,Gino,Michele,Gino,",
+      "Deadline": "12/14/2019",
       "Budget": "5000000",
-      "Storyteller": "test",
+      "Storyteller": "Test Story Teller",
       "id": 12
     },
     {
       "Status": "Draft",
       "RequestName": "Frayed crayons",
-      "Requestor": "12345",
+      "Requestor": "hakan@gmail.com",
       "GoodEnding": "Yes",
       "Description": "Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.",
       "NeedStoryteller": true,
       "Deadline": "12/31/2019",
       "Budget": "505000",
-      "Storyteller": "Test",
+      "Storyteller": "test",
       "id": 15
     },
     {
+      "Status": "Draft",
       "RequestName": "Rats and brats",
-      "Requestor": 12345,
+      "Requestor": "creditsuisse@gmail.com",
       "GoodEnding": "No",
       "Description": "Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.",
-      "NeedStoryteller": false,
-      "WantedCharacters": "",
-      "Deadline": 1570578960256,
-      "Budget": 275000,
-      "Status": "Draft",
+      "NeedStoryteller": true,
+      "WantedCharacters": "Antone,Jeanne",
+      "Deadline": "12/31/2019",
+      "Budget": "275000",
+      "Storyteller": "Storyteller",
       "id": 19
     },
     {
+      "Status": "Draft",
       "RequestName": "Fables at the tables",
-      "Requestor": 12355,
+      "Requestor": "12355",
       "GoodEnding": "Depends",
       "Description": "Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.",
       "NeedStoryteller": true,
-      "Storyteller": 12345,
-      "WantedCharacters": "charA;charD;charFGKS",
-      "Deadline": 1570534960256,
-      "Budget": 500000,
-      "Status": "Draft",
+      "Deadline": "10/08/2019",
+      "Budget": "500000",
+      "Storyteller": "Test",
       "id": 22
     },
     {
@@ -141,15 +162,15 @@
       "id": 23
     },
     {
+      "Status": "Draft",
       "RequestName": "Rats and brats",
-      "Requestor": 12345,
+      "Requestor": "12345",
       "GoodEnding": "No",
       "Description": "Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.",
-      "NeedStoryteller": false,
-      "WantedCharacters": "",
-      "Deadline": 1570578960256,
-      "Budget": 275000,
-      "Status": "Draft",
+      "NeedStoryteller": true,
+      "Storyteller": "567567567",
+      "Deadline": "10/09/2019",
+      "Budget": "275000",
       "id": 29
     },
     {
@@ -159,9 +180,9 @@
       "GoodEnding": "Depends",
       "Description": "Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.",
       "NeedStoryteller": true,
+      "Storyteller": "aadasd",
       "Deadline": "12/28/2019",
       "Budget": "500000",
-      "Storyteller": "22",
       "id": 32
     },
     {
@@ -189,15 +210,16 @@
       "id": 33
     },
     {
+      "Status": "Draft",
       "RequestName": "Rats and brats",
-      "Requestor": 12345,
+      "Requestor": "12345",
       "GoodEnding": "No",
       "Description": "Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.",
-      "NeedStoryteller": false,
-      "WantedCharacters": "",
-      "Deadline": 1570578960256,
-      "Budget": 275000,
-      "Status": "Draft",
+      "NeedStoryteller": true,
+      "WantedCharacters": "Rae,Nicholas,Shane,Nicholas,Shane,Shane,,Torrance,Jakayla,Dillon,Marielle,J",
+      "Deadline": "10/09/2019",
+      "Budget": "275000",
+      "Storyteller": "Storyteller",
       "id": 39
     }
   ]

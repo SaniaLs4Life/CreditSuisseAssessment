@@ -18,7 +18,22 @@
   color: #fff;
 }
 
+.datepicker-container {
+  display: flex;
+  width: 50%;
+  position: relative;
+}
 
+.datepicker-icon {
+  font-size: 24px;
+  padding: 10px;
+  position: absolute;
+  right: 0;
+  color: #000;
+  &:hover {
+    color: grey;
+  }
+}
 
 
 .date-container {

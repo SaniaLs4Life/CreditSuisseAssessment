@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import PropTypes from 'prop-types';
-import { IoIosArrowBack, IoIosArrowForward, IoMdClose } from 'react-icons/io';
+import {
+  IoIosArrowBack,
+  IoIosArrowForward,
+  IoMdClose,
+  IoMdCalendar
+} from 'react-icons/io';
 import { CustomFormInput } from './CustomComponents';
 import Popover from 'react-popover';
 import './CustomDatePicker.scss';
@@ -9,7 +14,8 @@ import './CustomDatePicker.scss';
 export default function CustomDatePicker({
   register,
   name,
-  value
+  value,
+  isCurrentUserOwner
 }) {
   const [day, setDay] = useState(
     moment()
@@ -95,7 +101,9 @@ export default function CustomDatePicker({
   };
 
   const toggleDatePicker = () => {
-    setToggleDate(prevState => !prevState);
+    if (isCurrentUserOwner) {
+      setToggleDate(prevState => !prevState);
+    }
   };
 
   return (
@@ -197,15 +205,19 @@ export default function CustomDatePicker({
         </div>
       }
     >
-      <CustomFormInput
-        width="50%"
-        type="text"
-        onClick={toggleDatePicker}
-        value={Deadline === 'Invalid date' ? '' : Deadline}
-        name={name}
-        ref={register}
-        placeholder="DD/MM/YYYY"
-      />
+      <div className="datepicker-container">
+        <IoMdCalendar className="datepicker-icon" onClick={toggleDatePicker} />
+        <CustomFormInput
+          width="100%"
+          type="text"
+          onClick={toggleDatePicker}
+          value={Deadline === 'Invalid date' ? '' : Deadline}
+          onChange={() => {}}
+          name={name}
+          ref={register}
+          placeholder="DD/MM/YYYY"
+        />
+      </div>
     </Popover>
   );
 }
@@ -213,5 +225,6 @@ export default function CustomDatePicker({
 CustomDatePicker.propTypes = {
   setDeadline: PropTypes.func,
   toggleDatePicker: PropTypes.func,
-  value: PropTypes.any
+  value: PropTypes.any,
+  isCurrentUserOwner: PropTypes.bool
 };
