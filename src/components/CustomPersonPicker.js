@@ -44,39 +44,42 @@ export default function CustomPersonPicker({
     }
   };
   return (
-    <div className="requestor-container">
-      <AiTwotoneDelete
-        className="requestor-remove"
-        onClick={handleRemovePerson}
-      />
-      <AiOutlineMail className="requestor-mail" />
-      <FaRegCommentAlt className="requestor-comment" />
-      <CustomFormInput
-        placeholder="Requestor"
-        width="100%"
-        onChange={handleSearch}
-        type="text"
-        className={errors.Requestor ? 'error' : ''}
-        ref={register({ required: 'This field cannot be empty!' })}
-        name="Requestor"
-      />
-      {showOptions && (
-        <div className="requestor-results">
-          {newResults && newResults.length > 0 ? (
-            newResults.slice(0, 5).map((e, i) => (
-              <div
-                key={i}
-                onClick={() => handleRequestor(e)}
-                className="requestor-result"
-              >
-                {e}
-              </div>
-            ))
-          ) : (
-            <div className="requestor-result">No user found</div>
-          )}
-        </div>
-      )}
+    <div>
+      <div className="requestor-container">
+        <AiTwotoneDelete
+          className="requestor-remove"
+          onClick={handleRemovePerson}
+        />
+        <AiOutlineMail className="requestor-mail" />
+        <FaRegCommentAlt className="requestor-comment" />
+        <CustomFormInput
+          placeholder="Requestor"
+          width="100%"
+          onChange={handleSearch}
+          type="text"
+          className={errors.Requestor ? 'error' : ''}
+          ref={register({ required: 'This field cannot be empty!' })}
+          name="Requestor"
+        />
+        {showOptions && (
+          <div className="requestor-results">
+            {newResults && newResults.length > 0 ? (
+              newResults.slice(0, 5).map((e, i) => (
+                <div
+                  key={i}
+                  onClick={() => handleRequestor(e)}
+                  className="requestor-result"
+                >
+                  {e}
+                </div>
+              ))
+            ) : (
+              <div className="requestor-result">No user found</div>
+            )}
+          </div>
+        )}
+      </div>
+
       <CustomErrorMessage>
         {errors.Requestor && errors.Requestor.message}
       </CustomErrorMessage>
