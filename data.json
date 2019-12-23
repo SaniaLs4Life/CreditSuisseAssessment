@@ -68,41 +68,28 @@
   ],
   "Requests": [
     {
-      "RequestName": "Fables at the tables",
-      "Requestor": 12355,
-      "GoodEnding": "Depends",
-      "Description": "Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.",
-      "NeedStoryteller": true,
-      "Storyteller": 12345,
-      "WantedCharacters": "charA;charD;charFGKS",
-      "Deadline": 1570534960256,
-      "Budget": 500000,
-      "Status": "Draft",
-      "Id": 12
-    },
-    {
-      "RequestName": "Frayed crayons",
-      "Requestor": 12345,
-      "GoodEnding": "yes",
-      "Description": "Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.",
-      "NeedStoryteller": false,
-      "WantedCharacters": "",
-      "Deadline": 1570578960256,
-      "Budget": 505000,
       "Status": "New",
-      "Id": 15
-    },
-    {
-      "RequestName": "Blue raider",
-      "Requestor": 12345,
+      "RequestName": "Fables at the tables",
+      "Requestor": "Requestor",
       "GoodEnding": "Yes",
       "Description": "Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.",
-      "NeedStoryteller": false,
-      "WantedCharacters": "",
-      "Deadline": 1570578960256,
-      "Budget": 505000,
-      "Status": " New",
-      "Id": 13
+      "NeedStoryteller": true,
+      "Deadline": "12/28/2019",
+      "Budget": "5000000",
+      "Storyteller": "test",
+      "id": 12
+    },
+    {
+      "Status": "Draft",
+      "RequestName": "Frayed crayons",
+      "Requestor": "12345",
+      "GoodEnding": "Yes",
+      "Description": "Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.",
+      "NeedStoryteller": true,
+      "Deadline": "12/31/2019",
+      "Budget": "505000",
+      "Storyteller": "Test",
+      "id": 15
     },
     {
       "RequestName": "Rats and brats",
@@ -114,7 +101,7 @@
       "Deadline": 1570578960256,
       "Budget": 275000,
       "Status": "Draft",
-      "Id": 19
+      "id": 19
     },
     {
       "RequestName": "Fables at the tables",
@@ -127,7 +114,7 @@
       "Deadline": 1570534960256,
       "Budget": 500000,
       "Status": "Draft",
-      "Id": 22
+      "id": 22
     },
     {
       "RequestName": "Frayed crayons",
@@ -139,7 +126,7 @@
       "Deadline": 1570578960256,
       "Budget": 505000,
       "Status": "New",
-      "Id": 25
+      "id": 25
     },
     {
       "RequestName": "Blue raider",
@@ -151,7 +138,7 @@
       "Deadline": 1570578960256,
       "Budget": 505000,
       "Status": " New",
-      "Id": 23
+      "id": 23
     },
     {
       "RequestName": "Rats and brats",
@@ -163,20 +150,19 @@
       "Deadline": 1570578960256,
       "Budget": 275000,
       "Status": "Draft",
-      "Id": 29
+      "id": 29
     },
     {
+      "Status": "Draft",
       "RequestName": "Fables at the tables",
-      "Requestor": 12355,
+      "Requestor": "12355",
       "GoodEnding": "Depends",
       "Description": "Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.",
       "NeedStoryteller": true,
-      "Storyteller": 12345,
-      "WantedCharacters": "charA;charD;charFGKS",
-      "Deadline": 1570534960256,
-      "Budget": 500000,
-      "Status": "Draft",
-      "Id": 32
+      "Deadline": "12/28/2019",
+      "Budget": "500000",
+      "Storyteller": "22",
+      "id": 32
     },
     {
       "RequestName": "Frayed crayons",
@@ -188,7 +174,7 @@
       "Deadline": 1570578960256,
       "Budget": 505000,
       "Status": "New",
-      "Id": 35
+      "id": 35
     },
     {
       "RequestName": "Blue raider",
@@ -200,7 +186,7 @@
       "Deadline": 1570578960256,
       "Budget": 505000,
       "Status": " New",
-      "Id": 33
+      "id": 33
     },
     {
       "RequestName": "Rats and brats",
@@ -212,7 +198,7 @@
       "Deadline": 1570578960256,
       "Budget": 275000,
       "Status": "Draft",
-      "Id": 39
+      "id": 39
     }
   ]
 }

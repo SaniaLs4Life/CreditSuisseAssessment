@@ -22,6 +22,9 @@ const CustomButton = styled.button`
   &:hover {
     background: #575756;
   }
+  &:disabled {
+    background: #a8a8a7;
+  }
 `;
 
 const CustomSortButton = styled.button`
@@ -171,7 +174,7 @@ const CustomFormHeader = styled.div`
   margin-bottom: 80px;
 `;
 
-const CustomFormInput = styled.input.attrs({ type: 'text' })`
+const CustomFormInput = styled.input`
   width: ${props => props.width && props.width};
   display: ${props => (props.isInline ? 'inline-block' : 'block')};
   outline: none;
@@ -181,11 +184,6 @@ const CustomFormInput = styled.input.attrs({ type: 'text' })`
   border: 1px solid #a8a8a7;
   margin-bottom: 10px;
   font-size: 16px;
-  &:disabled {
-    color: #a8a8a7;
-    border: 1px solid #dadada;
-    background: #FFF;
-  }
   &:active {
     border: 1px solid #000;
   }
@@ -193,10 +191,15 @@ const CustomFormInput = styled.input.attrs({ type: 'text' })`
     color: #000;
     border: 1px solid #000;
   }
+  &:disabled {
+    color: #a8a8a7;
+    border: 1px solid #dadada;
+    background: #fff;
+  }
 `;
 
 const CustomInputText = styled.div`
-  color: ${props => props.isDisabled ? '#a8a8a7' : '#000'};
+  color: ${props => (props.isDisabled ? '#a8a8a7' : '#000')};
   font-size: 14px;
   margin-bottom: 15px;
   font-weight: bold;
@@ -221,7 +224,7 @@ const CustomTextArea = styled.textarea`
   &:disabled {
     color: #a8a8a7;
     border: 1px solid #dadada;
-    background: #FFF;
+    background: #fff;
   }
 `;
 
@@ -230,7 +233,6 @@ const CustomErrorMessage = styled.div`
   font-size: 14px;
   font-weight: bold;
 `;
-
 
 export {
   CustomHeader,

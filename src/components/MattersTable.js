@@ -20,7 +20,15 @@ import { truncate } from '../utils/index';
 import CustomTooltip from './CustomTooltip';
 import './MattersTable.scss';
 
-export default function MattersTable({ matters, handleSortBy, sortBy }) {
+export default function MattersTable({
+  matters,
+  handleSortBy,
+  sortBy,
+  history
+}) {
+  const handleEdit = id => {
+    history.push(`form/${id}`);
+  };
   return (
     <CustomTable>
       <CustomTableHeader style={{ borderBottom: '1px solid #000' }}>
@@ -29,7 +37,7 @@ export default function MattersTable({ matters, handleSortBy, sortBy }) {
             ID
             {sortBy.type === 'asc' ? (
               <FaSortNumericDown
-                onClick={() => handleSortBy('Id', 'desc')}
+                onClick={() => handleSortBy('id', 'desc')}
                 style={{
                   verticalAlign: 'middle',
                   cursor: 'pointer',
@@ -38,7 +46,7 @@ export default function MattersTable({ matters, handleSortBy, sortBy }) {
               />
             ) : (
               <FaSortNumericUp
-                onClick={() => handleSortBy('Id', 'asc')}
+                onClick={() => handleSortBy('id', 'asc')}
                 style={{
                   verticalAlign: 'middle',
                   cursor: 'pointer',
@@ -147,8 +155,10 @@ export default function MattersTable({ matters, handleSortBy, sortBy }) {
         {matters.length > 0 ? (
           matters &&
           matters.map((item, i) => (
-            <CustomTableBodyRow key={i}>
-              <CustomTableBodyColumn data-label="ID">{truncate(item.Id, 5) || truncate(item.id, 5)}</CustomTableBodyColumn>
+            <CustomTableBodyRow key={i} onClick={() => handleEdit(item.Id || item.id)}>
+              <CustomTableBodyColumn data-label="ID">
+                {truncate(item.Id, 5) || truncate(item.id, 5)}
+              </CustomTableBodyColumn>
               <CustomTableBodyColumn data-label="Request Name">
                 <CustomTooltip
                   message={truncate(item.RequestName, 500)}
@@ -176,7 +186,9 @@ export default function MattersTable({ matters, handleSortBy, sortBy }) {
               <CustomTableBodyColumn data-label="Need Story Teller">
                 {item.NeedStoryteller === true ? 'Yes' : 'No'}
               </CustomTableBodyColumn>
-              <CustomTableBodyColumn data-label="Storyteller">{item.Storyteller}</CustomTableBodyColumn>
+              <CustomTableBodyColumn data-label="Storyteller">
+                {item.Storyteller}
+              </CustomTableBodyColumn>
               <CustomTableBodyColumn data-label="Wanted Characters">
                 {truncate(item.WantedCharacters, 50)}
               </CustomTableBodyColumn>
@@ -206,5 +218,6 @@ export default function MattersTable({ matters, handleSortBy, sortBy }) {
 MattersTable.propTypes = {
   matters: PropTypes.array,
   handleSortBy: PropTypes.func,
-  sortBy: PropTypes.object
+  sortBy: PropTypes.object,
+  history: PropTypes.object
 };

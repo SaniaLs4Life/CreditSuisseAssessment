@@ -2,9 +2,7 @@ import React, {
   useEffect,
   lazy,
   Suspense,
-  useState,
-  useLayoutEffect,
-  useRef
+  useState
 } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -24,19 +22,19 @@ import CustomPagination from './CustomPagination';
 import { ExportCSV } from './ExportCSV';
 import { MattersService } from '../Services/MattersService';
 import { ToggleContent, Modal } from './MessagePopup';
+import './Dashboard.scss';
 
 const LazyLoadMattersTable = lazy(() => import('./MattersTable'));
 
-export default function Dashboard() {
+export default function Dashboard({ history }) {
   const [page, setPage] = useState(1);
   const [total, setTotal] = useState(0);
   const [second, setSecond] = useState(0);
   const [showMessage, setShowMessage] = useState(true);
   const [sortBy, setSortBy] = useState({ field: 'Id', type: 'asc' });
   const [search, setSearch] = useState('');
-  const isUnmounted = useRef(false);
   const dispatch = useDispatch();
-  const {isPopupMessageVisible, matters} = useSelector(state => ({
+  const { isPopupMessageVisible, matters } = useSelector(state => ({
     matters: state.matters,
     isPopupMessageVisible: state.isPopupMessageVisible
   }));
@@ -98,7 +96,7 @@ export default function Dashboard() {
   };
 
   return (
-    <div>
+    <div className="dashboard-container">
       <CustomHeader>Online Reporting - GCMC</CustomHeader>
       <Link to="/form">
         <CustomButton>Create a new matter</CustomButton>
@@ -109,7 +107,7 @@ export default function Dashboard() {
         Reload
       </CustomSortButton>
       <ExportCSV csvData={matters} />
-      <span style={{ padding: '0 15px 0 15px' }}>
+      <span className="request-result">
         Request completed. Result content: {matters && matters.length}
       </span>
       <CustomPagination
@@ -125,6 +123,7 @@ export default function Dashboard() {
       />
       <Suspense fallback={<Skeleton height="80px" count={5} />}>
         <LazyLoadMattersTable
+          history={history}
           matters={matters}
           handleSortBy={handleSortBy}
           sortBy={sortBy}

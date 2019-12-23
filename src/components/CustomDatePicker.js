@@ -6,7 +6,11 @@ import { CustomFormInput } from './CustomComponents';
 import Popover from 'react-popover';
 import './CustomDatePicker.scss';
 
-export default function CustomDatePicker({ register, name }) {
+export default function CustomDatePicker({
+  register,
+  name,
+  value
+}) {
   const [day, setDay] = useState(
     moment()
       .date()
@@ -38,6 +42,10 @@ export default function CustomDatePicker({ register, name }) {
         .format('YYYY')}`
     );
   }, [day, month, year]);
+
+  useEffect(() => {
+    setDeadline(moment(value).format('L'));
+  }, [value]);
 
   const handleGoToToday = () => {
     setDay(moment().date());
@@ -190,11 +198,10 @@ export default function CustomDatePicker({ register, name }) {
       }
     >
       <CustomFormInput
-        width="100%"
+        width="50%"
         type="text"
         onClick={toggleDatePicker}
-        onChange={() => {}}
-        value={Deadline}
+        value={Deadline === 'Invalid date' ? '' : Deadline}
         name={name}
         ref={register}
         placeholder="DD/MM/YYYY"
@@ -205,5 +212,6 @@ export default function CustomDatePicker({ register, name }) {
 
 CustomDatePicker.propTypes = {
   setDeadline: PropTypes.func,
-  toggleDatePicker: PropTypes.func
+  toggleDatePicker: PropTypes.func,
+  value: PropTypes.any
 };

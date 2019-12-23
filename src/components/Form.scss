@@ -4,13 +4,22 @@ fieldset {
   border: none;
   padding: 0;
 }
+
+.disabled {
+  color: #a8a8a7 !important;
+}
+
+.disabled-border {
+  border: 1px solid #a8a8a7 !important;
+}
+
 .form-container {
   padding: 0 30px 0 30px;
 }
 .clearfix {
   clear: both;
 }
-.description-spoiler {
+.description {
   font-size: 12px;
   color: #999;
   font-style: italic;
@@ -119,7 +128,9 @@ fieldset {
   height: 28px;
   width: 28px;
 }
-.checkbox-container input[type='checkbox']:checked + .checkbox-container__circle {
+.checkbox-container
+  input[type='checkbox']:checked
+  + .checkbox-container__circle {
   background: #000;
   border: 1px solid #000;
 }
@@ -131,15 +142,14 @@ fieldset {
   width: 28px;
 }
 
-
 .checkbox-container
-input[type='checkbox']:checked
-+ .checkbox-container__circle:before {
+  input[type='checkbox']:checked
+  + .checkbox-container__circle:before {
   content: '';
   position: absolute;
   width: 10px;
   height: 3px;
-  background: #FFF;
+  background: #fff;
   top: 16px;
   left: 6px;
   -webkit-transform: rotate(35deg);
@@ -154,7 +164,7 @@ input[type='checkbox']:checked
   position: absolute;
   width: 16px;
   height: 3px;
-  background: #FFF;
+  background: #fff;
   left: 10px;
   top: 13px;
   -webkit-transform: rotate(130deg);
